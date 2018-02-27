@@ -1,4 +1,7 @@
 // Rover Object Goes Here
+var rover = {
+  direction: "N"
+}
 // ======================
 
 // ======================
