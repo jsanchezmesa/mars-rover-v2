@@ -6,7 +6,24 @@ var rover = {
 
 // ======================
 function turnLeft(rover){
-  console.log("turnLeft was called!");
+  switch( rover.direction ) {
+    case "N":
+      rover.direction = "W";
+      console.log("Rover has turned to west");
+      break;
+    case "E":
+      rover.direction = "N";
+      console.log("Rover has turned to north");
+      break;
+    case "S":
+      rover.direction = "E";
+      console.log("Rover has turned to east");
+      break;
+    case "W":
+      rover.direction = "S";
+      console.log("Rover has turned to south");
+      break;
+  }
 }
 
 function turnRight(rover){
