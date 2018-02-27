@@ -50,5 +50,19 @@ function turnRight(rover){
 }
 
 function moveForward(rover){
-  console.log("moveForward was called")
+  switch( rover.direction ) {
+    case "N":
+      rover.y -= 1;      
+      break;
+    case "E":
+      rover.x += 1;
+      break;
+    case "S":
+      rover.y += 1;
+      break;
+    case "W":
+      rover.x -= 1;
+      break;
+  }
+  console.log("Rover has moved to x: " + rover.x + ", y: " + rover.y );
 }
