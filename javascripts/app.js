@@ -66,3 +66,21 @@ function moveForward(rover){
   }
   console.log("Rover has moved to x: " + rover.x + ", y: " + rover.y );
 }
+
+function commandList(command, rover) {
+  command = command.toLowerCase();
+
+  for(var i = 0; i < command.length; i++) {
+    switch( command.charAt(i) ) {
+      case "f":
+        moveForward(rover);
+        break;
+      case "r":
+        turnRight(rover);
+        break;
+      case "l":
+        turnLeft(rover);
+        break;
+    }
+  }
+}
