@@ -1,6 +1,8 @@
 // Rover Object Goes Here
 var rover = {
-  direction: "N"
+  direction: "N",
+  x: 0,
+  y: 0
 }
 // ======================
 
