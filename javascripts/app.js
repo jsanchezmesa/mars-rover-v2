@@ -50,19 +50,31 @@ function turnRight(rover){
   }
 }
 
+/*
+function to move rover
+it checks limits, if rover is in a limit, it won't move
+*/
 function moveForward(rover){
   switch( rover.direction ) {
     case "N":
-      rover.y -= 1;      
+      if( rover.y > 0 ) {
+        rover.y -= 1; 
+      }           
       break;
     case "E":
-      rover.x += 1;
+      if( rover.x < 9 ) {
+        rover.x += 1;
+      }
       break;
     case "S":
-      rover.y += 1;
+      if( rover.y < 9 ) {
+        rover.y += 1;        
+      }
       break;
     case "W":
-      rover.x -= 1;
+      if( rover.x > 0 ) {
+        rover.x -= 1;
+      }
       break;
   }
   
