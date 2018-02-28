@@ -3,7 +3,7 @@ var rover = {
   direction: "N",
   x: 0,
   y: 0,
-  travelLog: []
+  travelLog: [ ]
 }
 // ======================
 
@@ -12,19 +12,19 @@ function turnLeft(rover){
   switch( rover.direction ) {
     case "N":
       rover.direction = "W";
-      console.log("Rover has turned to west");
+      //console.log("Rover has turned to west");
       break;
     case "E":
       rover.direction = "N";
-      console.log("Rover has turned to north");
+      //console.log("Rover has turned to north");
       break;
     case "S":
       rover.direction = "E";
-      console.log("Rover has turned to east");
+      //console.log("Rover has turned to east");
       break;
     case "W":
       rover.direction = "S";
-      console.log("Rover has turned to south");
+      //console.log("Rover has turned to south");
       break;
   }
 }
@@ -33,19 +33,19 @@ function turnRight(rover){
   switch( rover.direction ) {
     case "N":
       rover.direction = "E";
-      console.log("Rover has turned to east");
+      //console.log("Rover has turned to east");
       break;
     case "E":
       rover.direction = "S";
-      console.log("Rover has turned to south");
+      //console.log("Rover has turned to south");
       break;
     case "S":
       rover.direction = "W";
-      console.log("Rover has turned to west");
+      //console.log("Rover has turned to west");
       break;
     case "W":
       rover.direction = "N";
-      console.log("Rover has turned to north");
+      //console.log("Rover has turned to north");
       break;
   }
 }
@@ -65,7 +65,9 @@ function moveForward(rover){
       rover.x -= 1;
       break;
   }
-  console.log("Rover has moved to x: " + rover.x + ", y: " + rover.y );
+  
+  //console.log( "Rover moved to (" + rover.x + ", " + rover.y + ")" );
+  rover.travelLog.push( [rover.x, rover.y] );
 }
 
 function commandList(command, rover) {
@@ -83,5 +85,10 @@ function commandList(command, rover) {
         turnLeft(rover);
         break;
     }
+  }
+
+  // print rover travel log
+  for(var i = 0; i < rover.travelLog.length; i++) {
+    console.log( "Rover moved to (" + rover.travelLog[i][0] + ", " + rover.travelLog[i][1] + ")");
   }
 }
