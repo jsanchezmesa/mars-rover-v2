@@ -51,7 +51,7 @@ function turnRight(rover){
 }
 
 /*
-function to move rover
+function to move rover forward
 it checks limits, if rover is in a limit, it won't move
 */
 function moveForward(rover){
@@ -79,6 +79,39 @@ function moveForward(rover){
   }
   
   //console.log( "Rover moved to (" + rover.x + ", " + rover.y + ")" );
+  // add movement to travel log
+  rover.travelLog.push( [rover.x, rover.y] );
+}
+
+/*
+function to move rover backward
+it checks limits, if rover is in a limit, it won't move
+*/
+function moveBackward(rover){
+  switch( rover.direction ) {
+    case "N":
+      if( rover.y < 9 ) {
+        rover.y += 1;
+      }
+      break;
+    case "E":
+      if( rover.x > 0 ) {
+        rover.x -= 1;
+      }
+      break;
+    case "S":
+      if( rover.y > 0 ) {
+        rover.y -= 1;
+      }
+      break;
+    case "W":
+      if( rover.x < 9 ) {
+        rover.x += 1;
+      }
+      break;
+  }
+
+  // add movement to travel log
   rover.travelLog.push( [rover.x, rover.y] );
 }
 
