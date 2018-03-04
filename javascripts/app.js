@@ -5,6 +5,21 @@ var rover = {
   y: 0,
   travelLog: [ ]
 }
+
+// surface where rover will move
+// null = blank space, 1 = obstacle
+var gridSurface = [
+  [ null, null, 1, null, null, null, 1, 1, null, null ],
+  [ null, null, null, null, null, null, null, null, null, 1 ],
+  [ null, null, null, null, null, null, null, null, null, 1 ],
+  [ null, 1, null, null, null, null, null, null, null, null ],
+  [ null, null, 1, null, null, null, null, null, null, null ],
+  [ null, null, null, null, null, 1, null, null, null, null ],
+  [ null, null, null, null, null, null, null, null, null, null ],
+  [ null, null, null, null, null, null, null, null, null, null ],
+  [ null, null, null, null, null, null, null, null, null, null ],
+  [ null, null, null, null, 1, 1, null, null, null, null ]
+];
 // ======================
 
 // ======================
