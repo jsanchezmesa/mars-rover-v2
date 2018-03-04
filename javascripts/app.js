@@ -115,25 +115,45 @@ function moveBackward(rover){
   rover.travelLog.push( [rover.x, rover.y] );
 }
 
+/*
+ Function to enter a list of command
+ Command valid: (f)orward, (b)ackward, (l)eft, (r)ight
+*/
 function commandList(command, rover) {
+  var validCommand = true;
   command = command.toLowerCase();
 
+  // check if command list is valid
   for(var i = 0; i < command.length; i++) {
-    switch( command.charAt(i) ) {
-      case "f":
-        moveForward(rover);
-        break;
-      case "r":
-        turnRight(rover);
-        break;
-      case "l":
-        turnLeft(rover);
-        break;
+    if( command[i] != "f" && command[i] != "b" && command[i] != "l" && command[i] != "r" ) {
+      validCommand = false;
     }
   }
 
-  // print rover travel log
-  for(var i = 0; i < rover.travelLog.length; i++) {
-    console.log( "Rover moved to (" + rover.travelLog[i][0] + ", " + rover.travelLog[i][1] + ")");
-  }
+
+  // if command list is valid, it executes commands
+  // if not, it shows an error
+  if( validCommand ) {
+    for(var i = 0; i < command.length; i++) {
+      switch( command[i] ) {
+        case "f":
+          moveForward(rover);
+          break;
+        case "r":
+          turnRight(rover);
+          break;
+        case "l":
+          turnLeft(rover);
+          break;
+      }
+    }
+
+    // print rover travel log
+    for(var i = 0; i < rover.travelLog.length; i++) {
+      console.log( "Rover moved to (" + rover.travelLog[i][0] + ", " + rover.travelLog[i][1] + ")");
+    }
+  } else {
+    console.log( "Command list not valid" );
+    console.log( "Command must be (f)orward, (b)ackward, (l)eft, (r)ight" );
+  }  
 }
