@@ -70,32 +70,73 @@ function to move rover forward
 it checks limits, if rover is in a limit, it won't move
 */
 function moveForward(rover){
+  var movement = false;
+  // show if rover gets a limit or obstacle
+  var limit = false;
+  var obstacle = false;
+
   switch( rover.direction ) {
     case "N":
+      // check limit
       if( rover.y > 0 ) {
-        rover.y -= 1; 
+        // check if position is free
+        if( gridSurface[(rover.y)-1][rover.x] == null ) {
+          rover.y -= 1; 
+          movement = true;
+        } else {
+          obstacle = true;
+        }        
+      } else {
+        limit = true;
       }           
       break;
     case "E":
       if( rover.x < 9 ) {
-        rover.x += 1;
+        if( gridSurface[rover.y][(rover.x)+1] == null ) {
+          rover.x += 1;
+          movement = true;
+        } else {
+          obstacle = true;
+        }        
+      } else {
+        limit = true;
       }
       break;
     case "S":
       if( rover.y < 9 ) {
-        rover.y += 1;        
+        if( gridSurface[(rover.y)+1][rover.x] == null ) {
+          rover.y += 1; 
+          movement = true;
+        } else {
+          obstacle = true;
+        }               
+      } else {
+        limit = true;
       }
       break;
     case "W":
       if( rover.x > 0 ) {
-        rover.x -= 1;
+        if( gridSurface[rover.y][(rover.x)-1] == null ) {
+          rover.x -= 1;
+          movement = true;
+        } else {
+          obstacle = true;
+        }        
+      } else {
+        limit = true;
       }
       break;
   }
   
   //console.log( "Rover moved to (" + rover.x + ", " + rover.y + ")" );
-  // add movement to travel log
-  rover.travelLog.push( [rover.x, rover.y] );
+  // add movement to travel log if rover has moved
+  if( movement ) {
+    rover.travelLog.push( [rover.x, rover.y] );
+  } else if( limit ) {
+    console.log("Error: Rover got a surface limit");
+  } else if( obstacle ) {
+    console.log("Error: Rover cannot move, there is an obstacle");
+  }
 }
 
 /*
