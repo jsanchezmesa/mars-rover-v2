@@ -1,8 +1,15 @@
 // Rover Object Goes Here
-var rover = {
+var rover1 = {
   direction: "N",
   x: 0,
   y: 0,
+  travelLog: [ ]
+}
+
+var rover2 = {
+  direction: "N",
+  x: 0,
+  y: 10,
   travelLog: [ ]
 }
 
