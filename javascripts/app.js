@@ -9,7 +9,7 @@ var rover1 = {
 var rover2 = {
   direction: "N",
   x: 0,
-  y: 10,
+  y: 9,
   travelLog: [ ]
 }
 
@@ -78,9 +78,10 @@ it checks limits, if rover is in a limit, it won't move
 */
 function moveForward(rover, grid){
   var movement = false;
-  // show if rover gets a limit or obstacle
+  // show if rover gets a limit, obstacle or another rover
   var limit = false;
   var obstacle = false;
+  var anotherRover = false;
 
   switch( rover.direction ) {
     case "N":
@@ -88,23 +89,40 @@ function moveForward(rover, grid){
       if( rover.y > 0 ) {
         // check if position is free
         if( grid[(rover.y)-1][rover.x] == 0 ) {
+          // set now position as free
+          grid[rover.y][rover.x] = 0;
+
+          // set next position as occupied
+          grid[(rover.y)-1][rover.x] = 2;
+
+          // update rover position
           rover.y -= 1; 
+
           movement = true;
-        } else {
+        } else if( grid[(rover.y)-1][rover.x] == 1 ) {
+          // an obstacle is found
           obstacle = true;
-        }        
+        } else if( grid[(rover.y)-1][rover.x] == 2 ) {
+          // another rover is found
+          anotherRover = true;
+        }   
       } else {
+        // a limit is found
         limit = true;
       }           
       break;
     case "E":
       if( rover.x < 9 ) {
         if( grid[rover.y][(rover.x)+1] == 0 ) {
+          grid[rover.y][rover.x] = 0;
+          grid[rover.y][(rover.x)+1] = 2;
           rover.x += 1;
           movement = true;
-        } else {
+        } else if( grid[rover.y][(rover.x)+1] == 1 ) {
           obstacle = true;
-        }        
+        } else if( grid[rover.y][(rover.y)+1] == 2 ) {
+          anotherRover = true;
+        }    
       } else {
         limit = true;
       }
@@ -112,11 +130,15 @@ function moveForward(rover, grid){
     case "S":
       if( rover.y < 9 ) {
         if( grid[(rover.y)+1][rover.x] == 0 ) {
+          grid[rover.y][rover.x] = 0;
+          grid[(rover.y)+1][rover.x] = 2;
           rover.y += 1; 
           movement = true;
-        } else {
+        } else if( grid[(rover.y)+1][rover.x] == 1 ) {
           obstacle = true;
-        }               
+        } else if( grid[(rover.y)+1][rover.x] == 2 ) {
+          anotherRover = true;
+        }
       } else {
         limit = true;
       }
@@ -124,11 +146,15 @@ function moveForward(rover, grid){
     case "W":
       if( rover.x > 0 ) {
         if( grid[rover.y][(rover.x)-1] == 0 ) {
+          grid[rover.y][rover.x] = 0;
+          grid[rover.y][(rover.x)-1] = 2;
           rover.x -= 1;
           movement = true;
-        } else {
+        } else if( grid[rover.y][(rover.x)-1] == 1 ) {
           obstacle = true;
-        }        
+        } else if( grid[rover.y][(rover.x)-1] == 2 ) {
+          anotherRover = true;
+        }
       } else {
         limit = true;
       }
@@ -143,6 +169,8 @@ function moveForward(rover, grid){
     console.log("Error: Rover got a surface limit");
   } else if( obstacle ) {
     console.log("Error: Rover cannot move, there is an obstacle");
+  } else if( anotherRover ) {
+    console.log("Error: Another rover was found");
   }
 }
 
