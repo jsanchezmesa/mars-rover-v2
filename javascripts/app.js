@@ -76,7 +76,7 @@ function turnRight(rover){
 function to move rover forward
 it checks limits, if rover is in a limit, it won't move
 */
-function moveForward(rover){
+function moveForward(rover, grid){
   var movement = false;
   // show if rover gets a limit or obstacle
   var limit = false;
@@ -87,7 +87,7 @@ function moveForward(rover){
       // check limit
       if( rover.y > 0 ) {
         // check if position is free
-        if( gridSurface[(rover.y)-1][rover.x] == null ) {
+        if( grid[(rover.y)-1][rover.x] == null ) {
           rover.y -= 1; 
           movement = true;
         } else {
@@ -99,7 +99,7 @@ function moveForward(rover){
       break;
     case "E":
       if( rover.x < 9 ) {
-        if( gridSurface[rover.y][(rover.x)+1] == null ) {
+        if( grid[rover.y][(rover.x)+1] == null ) {
           rover.x += 1;
           movement = true;
         } else {
@@ -111,7 +111,7 @@ function moveForward(rover){
       break;
     case "S":
       if( rover.y < 9 ) {
-        if( gridSurface[(rover.y)+1][rover.x] == null ) {
+        if( grid[(rover.y)+1][rover.x] == null ) {
           rover.y += 1; 
           movement = true;
         } else {
@@ -123,7 +123,7 @@ function moveForward(rover){
       break;
     case "W":
       if( rover.x > 0 ) {
-        if( gridSurface[rover.y][(rover.x)-1] == null ) {
+        if( grid[rover.y][(rover.x)-1] == null ) {
           rover.x -= 1;
           movement = true;
         } else {
@@ -150,7 +150,7 @@ function moveForward(rover){
 function to move rover backward
 it checks limits, if rover is in a limit, it won't move
 */
-function moveBackward(rover){
+function moveBackward(rover, grid){
   var movement = false;
   // show if rover gets a limit or obstacle
   var limit = false;
@@ -161,7 +161,7 @@ function moveBackward(rover){
       // check limit
       if( rover.y < 9 ) {
         // check if position is free
-        if( gridSurface[(rover.y)+1][rover.x] == null ) {
+        if( grid[(rover.y)+1][rover.x] == null ) {
           rover.y += 1;
           movement = true;
         } else {
@@ -173,7 +173,7 @@ function moveBackward(rover){
       break;
     case "E":
       if( rover.x > 0 ) {
-        if( gridSurface[rover.y][(rover.x)-1] == null ) {
+        if( grid[rover.y][(rover.x)-1] == null ) {
           rover.x -= 1;
           movement = true;
         } else {
@@ -185,7 +185,7 @@ function moveBackward(rover){
       break;
     case "S":
       if( rover.y > 0 ) {
-        if( gridSurface[(rover.y)-1][rover.x] == null ) {
+        if( grid[(rover.y)-1][rover.x] == null ) {
           rover.y -= 1;
           movement = true;
         } else {
@@ -197,7 +197,7 @@ function moveBackward(rover){
       break;
     case "W":
       if( rover.x < 9 ) {
-        if( gridSurface[rover.y][(rover.x)+1] == null ) {
+        if( grid[rover.y][(rover.x)+1] == null ) {
           rover.x += 1;
           movement = true;
         } else {
@@ -223,7 +223,7 @@ function moveBackward(rover){
  Function to enter a list of command
  Command valid: (f)orward, (b)ackward, (l)eft, (r)ight
 */
-function commandList(command, rover) {
+function commandList(command, rover, grid) {
   var validCommand = true;
   command = command.toLowerCase();
 
@@ -241,7 +241,10 @@ function commandList(command, rover) {
     for(var i = 0; i < command.length; i++) {
       switch( command[i] ) {
         case "f":
-          moveForward(rover);
+          moveForward(rover, grid);
+          break;
+        case "b":
+          moveBackward(rover, grid);
           break;
         case "r":
           turnRight(rover);
@@ -261,3 +264,24 @@ function commandList(command, rover) {
     console.log( "Command must be (f)orward, (b)ackward, (l)eft, (r)ight" );
   }  
 }
+
+
+/* Move 2 rovers by turns */
+function play(grid, rover1, rover2) {
+  var totalTurns = 6;
+  var turn = 1;
+  var movement = "rfffrbrfff";
+
+  while( turn <= totalTurns ) {
+    if( turn % 2 != 0 ) {
+      // rover1 turn
+      console.log("Rover1 turn");
+    } else {
+      // rover2 turn
+      console.log("Rover2 turn");
+    }
+    turn++;
+  }
+}
+
+play( gridSurface, rover1, rover2 );
