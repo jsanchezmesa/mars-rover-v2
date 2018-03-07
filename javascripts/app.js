@@ -14,18 +14,18 @@ var rover2 = {
 }
 
 // surface where rover will move
-// null = blank space, 1 = obstacle
+// 0 = blank space, 1 = obstacle, 2 = rover
 var gridSurface = [
-  [ null, null, 1, null, null, null, 1, 1, null, null ],
-  [ null, null, null, null, null, null, null, null, null, 1 ],
-  [ null, null, null, null, null, null, null, null, null, 1 ],
-  [ null, 1, null, null, null, null, null, null, null, null ],
-  [ null, null, 1, null, null, null, null, null, null, null ],
-  [ null, null, null, null, null, 1, null, null, null, null ],
-  [ null, null, null, null, null, null, null, null, null, null ],
-  [ null, null, null, null, null, null, null, null, null, null ],
-  [ null, null, null, null, null, null, null, null, null, null ],
-  [ null, null, null, null, 1, 1, null, null, null, null ]
+  [ 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
+  [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 ]
 ];
 // ======================
 
@@ -87,7 +87,7 @@ function moveForward(rover, grid){
       // check limit
       if( rover.y > 0 ) {
         // check if position is free
-        if( grid[(rover.y)-1][rover.x] == null ) {
+        if( grid[(rover.y)-1][rover.x] == 0 ) {
           rover.y -= 1; 
           movement = true;
         } else {
@@ -99,7 +99,7 @@ function moveForward(rover, grid){
       break;
     case "E":
       if( rover.x < 9 ) {
-        if( grid[rover.y][(rover.x)+1] == null ) {
+        if( grid[rover.y][(rover.x)+1] == 0 ) {
           rover.x += 1;
           movement = true;
         } else {
@@ -111,7 +111,7 @@ function moveForward(rover, grid){
       break;
     case "S":
       if( rover.y < 9 ) {
-        if( grid[(rover.y)+1][rover.x] == null ) {
+        if( grid[(rover.y)+1][rover.x] == 0 ) {
           rover.y += 1; 
           movement = true;
         } else {
@@ -123,7 +123,7 @@ function moveForward(rover, grid){
       break;
     case "W":
       if( rover.x > 0 ) {
-        if( grid[rover.y][(rover.x)-1] == null ) {
+        if( grid[rover.y][(rover.x)-1] == 0 ) {
           rover.x -= 1;
           movement = true;
         } else {
@@ -161,7 +161,7 @@ function moveBackward(rover, grid){
       // check limit
       if( rover.y < 9 ) {
         // check if position is free
-        if( grid[(rover.y)+1][rover.x] == null ) {
+        if( grid[(rover.y)+1][rover.x] == 0 ) {
           rover.y += 1;
           movement = true;
         } else {
@@ -173,7 +173,7 @@ function moveBackward(rover, grid){
       break;
     case "E":
       if( rover.x > 0 ) {
-        if( grid[rover.y][(rover.x)-1] == null ) {
+        if( grid[rover.y][(rover.x)-1] == 0 ) {
           rover.x -= 1;
           movement = true;
         } else {
@@ -185,7 +185,7 @@ function moveBackward(rover, grid){
       break;
     case "S":
       if( rover.y > 0 ) {
-        if( grid[(rover.y)-1][rover.x] == null ) {
+        if( grid[(rover.y)-1][rover.x] == 0 ) {
           rover.y -= 1;
           movement = true;
         } else {
@@ -197,7 +197,7 @@ function moveBackward(rover, grid){
       break;
     case "W":
       if( rover.x < 9 ) {
-        if( grid[rover.y][(rover.x)+1] == null ) {
+        if( grid[rover.y][(rover.x)+1] == 0 ) {
           rover.x += 1;
           movement = true;
         } else {
