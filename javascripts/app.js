@@ -16,16 +16,16 @@ var rover2 = {
 // surface where rover will move
 // 0 = blank space, 1 = obstacle, 2 = rover
 var gridSurface = [
-  [ 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 ],
-  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
-  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
-  [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ],
-  [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ],
-  [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ],
   [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
   [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
   [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-  [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 ]
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 ];
 // ======================
 
@@ -312,6 +312,23 @@ function commandList(command, rover, grid) {
   }  
 }
 
+/* Setup grid with obstacles */
+function initGrid( grid, numObstacles ) {
+
+  for( var i = 1; i <= numObstacles; i++ ) {
+    //get a random row and col
+    var row = Math.floor( Math.random() * 10 );
+    var col = Math.floor( Math.random() * 10 );
+
+    // check if position is free
+    // if not repeat to get numObstacles
+    if( grid[col][row] == 0 ) {
+      grid[col][row] = 1;
+    } else {
+      i--;
+    }
+  }
+}
 
 /* Move 2 rovers by turns */
 function play(grid, rover1, rover2) {
@@ -322,6 +339,9 @@ function play(grid, rover1, rover2) {
   // put rovers in grid
   grid[rover1.y][rover1.x] = 2;
   grid[rover2.y][rover2.x] = 2;
+
+  // init grid with 20 obstacles
+  initGrid( grid, 20 );
 
   while( turn <= totalTurns ) {
     if( turn % 2 != 0 ) {
