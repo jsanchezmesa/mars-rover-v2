@@ -330,6 +330,26 @@ function initGrid( grid, numObstacles ) {
   }
 }
 
+/* Setup rover position */
+function initRover( rover, grid ) {
+  // check if rover is positioned
+  var finished = false;
+
+  // repeat if rover is not positioned
+  while( !finished ) {
+    var row = Math.floor( Math.random() * 10 );
+    var col = Math.floor( Math.random() * 10 );
+
+    // check if position is free
+    if( grid[col][row] == 0 ) {
+      rover.x = row;
+      rover.y = col;
+      grid[col][row] = 2;
+      finished = true;
+    }
+  }  
+}
+
 /* Move 2 rovers by turns */
 function play(grid, rover1, rover2) {
   var totalTurns = 6;
@@ -337,8 +357,8 @@ function play(grid, rover1, rover2) {
   var movement = "rffflfrfff";
 
   // put rovers in grid
-  grid[rover1.y][rover1.x] = 2;
-  grid[rover2.y][rover2.x] = 2;
+  initRover( rover1, grid );
+  initRover( rover2, grid );
 
   // init grid with 20 obstacles
   initGrid( grid, 20 );
