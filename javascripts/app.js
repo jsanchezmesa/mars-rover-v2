@@ -66,7 +66,7 @@ function turnRight(rover){
 
 /*
 function to move rover forward
-it checks limits, if rover is in a limit, it won't move
+it won't move if there are limits,obstacles and other rovers
 */
 function moveForward(rover, grid){
   var movement = false;
@@ -166,8 +166,8 @@ function moveForward(rover, grid){
 }
 
 /*
-function to move rover backward
-it checks limits, if rover is in a limit, it won't move
+function to move rover forward
+it won't move if there are limits,obstacles and other rovers
 */
 function moveBackward(rover, grid){
   var movement = false;
